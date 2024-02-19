@@ -1,0 +1,10 @@
+pointers:
+
+int * pX = &x;
+integer pointer named pX is set to the adress of x
+
+int y = *pX;
+integer named y is set to the thing pointed to by pX
+
+(pointer_name)->(variable_name)
+The -> operator gives the value held by variable_name to structure or union variable pointer_name.
