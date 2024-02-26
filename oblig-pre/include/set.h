@@ -3,6 +3,7 @@
 #define SET_H
 
 #include "common.h"
+#include "list.h" 
 
 /*
  * The type of sets.
@@ -14,13 +15,13 @@ typedef struct set set_t;
  * Creates a new set using the given comparison function
  * to compare elements of the set.
  */
-set_t *set_create(cmpfunc_t cmpfunc);
+set_t *set_create(cmpfunc_t cmpfunc);  //check+
 
 /*
  * Destroys the given set.  Subsequently accessing the set
  * will lead to undefined behavior.
  */
-void set_destroy(set_t *set);  //check
+void set_destroy(set_t *set);  //check+
 
 /*
  * Returns the size (cardinality) of the given set.
@@ -30,13 +31,13 @@ int set_size(set_t *set);   //check
 /*
  * Adds the given element to the given set.
  */
-void set_add(set_t *set, void *elem);  //check
+void set_add(set_t *set, void *elem);  //check+
 
 /*
  * Returns 1 if the given element is contained in
  * the given set, 0 otherwise.
  */
-int set_contains(set_t *set, void *elem);  // Check
+int set_contains(set_t *set, void *elem);  // Check+
 
 /*
  * Returns the union of the two given sets; the returned

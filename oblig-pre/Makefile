@@ -3,7 +3,7 @@
 ## Morten Grønnesby <morten.gronnesby@uit.no>
 
 LIST_SRC=linkedlist.c
-SET_SRC=   # Insert the file name of your set implementation here
+SET_SRC=array_based_set_V1.c  # Insert the file name of your set implementation here
 SPAMFILTER_SRC=spamfilter.c common.c $(LIST_SRC) $(SET_SRC)
 NUMBERS_SRC=numbers.c common.c $(LIST_SRC) $(SET_SRC)
 ASSERT_SRC=assert_set.c common.c $(LIST_SRC) $(SET_SRC)
@@ -16,7 +16,7 @@ ASSERT_SRC:=$(patsubst %.c,src/%.c, $(ASSERT_SRC))
 CFLAGS=-Wall -Wextra -g -Wpedantic
 LDFLAGS=-lm -DLOG_LEVEL=0 -DERROR_FATAL
 
-all: spamfilter numbers
+all: numbers spamfilter
 
 spamfilter: $(SPAMFILTER_SRC) Makefile
 	gcc -o $@ $(CFLAGS) $(SPAMFILTER_SRC) -I$(INCLUDE) $(LDFLAGS)

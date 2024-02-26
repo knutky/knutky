@@ -8,3 +8,19 @@ integer named y is set to the thing pointed to by pX
 
 (pointer_name)->(variable_name)
 The -> operator gives the value held by variable_name to structure or union variable pointer_name.
+
+void (*function_pointer)(int)      pointer to function
+function_pointer = &function       function pointer will store memoryadress to function
+(*function_pointer)(argument)      calling function
+
+
+
+could try:   int *a = (int *) malloc(sizeof(int)* 10)
+
+
+void *p;
+p = &b;
+printf("%f\n", *p)      // gives argument type voidis incomplete  (cant dereference), solution with typecasting
+
+
+void** pointer to pointer to void

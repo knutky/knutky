@@ -2,11 +2,12 @@
 #ifndef LIST_H
 #define LIST_H
 
+
 #include "common.h"
 
-/*
- * The type of lists.
- */
+typedef struct list_iter list_iter_t;
+
+
 typedef struct list list_t;
 
 
@@ -36,6 +37,13 @@ int list_size(list_t *list);
  * Returns 1 on success, and 0 if the operation failed.
  */
 int list_addfirst(list_t *list, void *elem);
+
+/*  I Added this function:
+* Adds the given element somwhere of the given list.
+* Returns 1 on success, and 0 if the operation failed.
+*/
+int list_addanywhere(list_t *list, void *elem, list_iter_t *iter);
+
 
 /*
  * Adds the given element to the end of the given list.

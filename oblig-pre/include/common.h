@@ -36,4 +36,5 @@ struct list *find_files(char *root);
  */
 int compare_strings(void *a, void *b);
 
+
 #endif

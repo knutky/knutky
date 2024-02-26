@@ -16,7 +16,7 @@ static void *newint(int i)
 {
     int *p = malloc(sizeof(int));
     *p = i;
-    return p;
+    return p; // pointer to an int
 }
 
 /*
@@ -69,7 +69,7 @@ int main()
     /* Initialize sets */
     for (i = 0; i <= n; i++)
     {
-        set_add(all, numbers[i]);
+        set_add(all, numbers[i]); // numbers[i] = pointer to the number i
         if (i % 2 == 0)
         {
             set_add(evens, numbers[i]);
@@ -94,7 +94,6 @@ int main()
             set_add(primes, numbers[i]);
         }
     }
-
     /* Show resulting sets */
     printset("Numbers:", all);
     printset("Even numbers:", evens);

@@ -1,5 +1,5 @@
 /* Author: Steffen Viken Valvaag <steffenv@cs.uit.no> */
-#include "list.h"
+#include "../include/list.h"
 
 #include <stdlib.h>
 
@@ -26,6 +26,9 @@ struct list_iter
 {
     listnode_t *node;
 };
+
+typedef struct list_iter list_iter_t;
+
 
 static listnode_t *newnode(void *elem)
 {
@@ -88,6 +91,39 @@ int list_addfirst(list_t *list, void *elem)
     list->size++;
     return 1;
 }
+
+
+int list_addanywhere(list_t *list, void *elem, list_iter_t *iter)  {
+    listnode_t *node = newnode(elem);
+    // If node not created
+    if (node == NULL){
+        return 0;
+    }if (list->head == NULL) {
+        // If list is currently empty
+        list->head = list->tail = node;
+    }else if (iter->node == NULL){
+        // If element should be the last on the list
+        list->tail->next = node;
+        node->prev = list->tail;
+        list->tail = node;
+    }else if (iter->node == list->head){
+        // If element should be first on list
+        list->head->prev = node;
+        node->next = list->head;
+        list->head = node;
+    } else {
+        // Insert the new node before the iter node
+        node->next = iter->node;
+        node->prev = iter->node->prev;
+        iter->node->prev = node;
+        node->prev->next = node;
+        node->elem = elem;
+        }
+    list->size++;
+    return 1;
+}
+
+
 
 int list_addlast(list_t *list, void *elem)
 {
@@ -284,33 +320,6 @@ void list_sort(list_t *list)
     }
 }
 
-/*
- * Not actually used; included for reference.
- */
-/*
-static void list_selection_sort(list_t *list)
-{
-    listnode_t *min, *i, *j;
-
-    if (list->size < 2)
-        return;
-
-    // Selection sort
-    for (i = list->head; i != NULL; i = i->next) {
-        min = i;
-        for (j = i->next; j != NULL; j = j->next) {
-            if (list->cmpfunc(j->elem, min->elem) < 0)
-                min = j;
-        }
-        if (min != i) {
-            void *tmp = min->elem;
-            min->elem = i->elem;
-            i->elem = tmp;
-        }
-    }
-}
-*/
-
 list_iter_t *list_createiter(list_t *list)
 {
     list_iter_t *iter = malloc(sizeof(list_iter_t));
@@ -324,6 +333,7 @@ list_iter_t *list_createiter(list_t *list)
 void list_destroyiter(list_iter_t *iter)
 {
     free(iter);
+    iter->node = NULL;
 }
 
 int list_hasnext(list_iter_t *iter)
